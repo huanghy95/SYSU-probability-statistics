@@ -7,7 +7,7 @@ parser.add_argument('inputFile', help='inputFile')
 parser.add_argument('outputFile', help='ouputFile')
 args=parser.parse_args()
 print(args.inputFile)
-print(args.ouputFile)
+print(args.outputFile)
 
 # mycompress=compress.Compress()
 # mycompress.ziptxt(inputFile,outputFile);
