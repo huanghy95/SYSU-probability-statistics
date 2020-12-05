@@ -32,8 +32,8 @@ class Compress:
             self.cnt[c]+=1
             self.update()
         else:
-            self.right=self.left+diff*self.rp1[ord(self.last)*self.total+ord(c)]
-            self.left=self.left+diff*self.lp1[ord(self.last)*self.total+ord(c)]
+            self.right=self.left+diff*self.rp2[ord(self.last)*self.total+ord(c)]
+            self.left=self.left+diff*self.lp2[ord(self.last)*self.total+ord(c)]
             self.cnt[self.last+c]+=1
             self.last=c
             self.update()
