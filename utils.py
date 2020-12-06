@@ -32,21 +32,20 @@ def update(lp,rp,cnt,total):
 
 #读入字符
 def read(self,c):
-    print(ord(c))
-    diff=self.right-self.left
+    diff=self.right-self.left #一开始的区间长度
+
     #读取第一个数字时用一阶（不需要update）
     if self.last==-1:
-        ordC=ord(c)
-        self.right=self.left+diff*self.rp1[ordC]
+        ordC=ord(c) #下标
+        #更新左右区间
+        self.right=self.left+diff*self.rp1[ordC] 
         self.left=self.left+diff*self.lp1[ordC]
-        # self.cnt1[ord(c)]+=1
-        self.last=ord(c)
-        # update(self.lp1,self.rp1,self.cnt1,self.total)
+        self.last=ord(c) # 记录上次出现字符
     #其他状况用二阶
     else:
-        ordC=self.last*self.total+ord(c)
-        self.right=self.left+self.diff*self.rp2[ordC]
+        ordC=self.last*self.total+ord(c) #下标
+        self.right=self.left+self.diff*self.rp2[ordC] 
         self.left=self.left+diff*self.lp2[ordC]
-        self.cnt2[ordC]+=1
-        self.last=ord(c)
-        update(self.lp2,self.rp2,self.cnt2,self.total*self.total)
+        self.cnt2[ordC]+=1 
+        self.last=ord(c) # 记录上次出现字符
+        update(self.lp2,self.rp2,self.cnt2,self.total*self.total) #更新字典

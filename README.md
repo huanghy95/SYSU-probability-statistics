@@ -15,8 +15,10 @@ final-term project
     - 更新区间left,right,如果两个数字有相同的数字,使用generateWriteData函数生成待写入数字,并使用写进二进制数字（TODO）
     - 更新概率表用于下一次计算
 -  已完成
+   -  compress和decompress大致框架
    -  封装成utils文件，compress和decompress可以调用的文件放在那里
 - TODO
+  - decompress细节实现
+  - 二层压缩？
   - ASCII码可显示为128位,是否要取256位?
   - 怎么进行边读边写（啥时候将浮点数转化为二进制数写入？）
-  - decompress还没写(huanghy写)
