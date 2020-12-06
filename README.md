@@ -12,7 +12,9 @@ final-term project
   - 这里的lp和rp是概率表,标志着每一个字符组合的概率区间
     - 概率表的下标是ord(`{ascii码}`),ascii码是chr(`{下标}`)
   - 每读取一个字符
-    - 更新区间left,right,如果两个数字有相同的数字,使用generateWriteData函数生成待写入数字,并使用写进二进制数字（TODO）
+    - 更新区间left,right,如果两个数字有相同的数字,使用generateWriteData函数生成待写入数字,并使用写进二进制数字
+      - 具体实现为用一个num数组存储所有相同的数字（但是先不写）
+      - 然后所有字符读取完成后再将整一个数组转化成二进制数字bin数组
     - 更新概率表用于下一次计算
 -  已完成
    -  compress和decompress大致框架
@@ -21,4 +23,3 @@ final-term project
   - decompress细节实现
   - 二层压缩？
   - ASCII码可显示为128位,是否要取256位?
-  - 怎么进行边读边写（啥时候将浮点数转化为二进制数写入？）
