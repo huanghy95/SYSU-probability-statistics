@@ -26,9 +26,9 @@ def update(self):
     for i in range(self.total):
         self.rp2[cur]=(0 if cur==0 else self.rp2[cur-1])+self.cnt2[i]
         cur+=1
-    sum=self.rp2[total-1]
+    sum=self.rp2[self.total-1]
     self.rp2/=sum
-    self.lp2[1:total]=self.rp2[0:total-1]
+    self.lp2[1:self.total]=self.rp2[0:self.total-1]
 
 #读入字符
 def read(self,c):
