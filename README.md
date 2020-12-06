@@ -14,6 +14,8 @@ final-term project
   - 每读取一个字符
     - 更新区间left,right,如果两个数字有相同的数字,使用generateWriteData函数生成待写入数字,并使用写进二进制数字
     - 更新概率表用于下一次计算
+-  已完成
+   -  封装成utils文件，compress和decompress可以调用的文件放在那里
 - TODO
   - ASCII码可显示为128位,是否要取256位?
   - decompress还没写(huanghy写)
