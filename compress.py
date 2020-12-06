@@ -29,40 +29,42 @@ class Compress:
 
     #计算可写入文件数字(TODO)
     def generateWriteData(self):
-        bits=0
-        while True:
-            leftInt=int(self.left*10)
-            rightInt=int(self.right*10)
-            if leftInt==rightInt:
-                self.writeData*=10
-                self.writeData+=leftInt
-                self.left=self.left*10-leftInt
-                self.right=self.right*10-rightInt
-                bits+=1
-            else: 
-                self.writeData/=bits
-                return bits
+        # bits=0
+        # while True:
+        #     leftInt=int(self.left*10)
+        #     rightInt=int(self.right*10)
+        #     if leftInt==rightInt:
+        #         self.writeData*=10
+        #         self.writeData+=leftInt
+        #         self.left=self.left*10-leftInt
+        #         self.right=self.right*10-rightInt
+        #         bits+=1
+        #     else: 
+        #         self.writeData/=bits
+        #         return bits
+        pass
 
     #压缩(TODO)
     def ziptxt(self,inputFile,outputFile):
         with open("./"+inputFile,"r") as readFile:
             with open("./"+outputFile,"wb") as writeFile:
-                lines=0
-                for line in readFile:
-                    for c in line:
-                        utils.read(self,c)
-                        bits=self.generateWriteData()
-                        if bits:
-                            # print(self.writeData)
-                            # print("write into file "+str(self.writeData)+" "+str(bytes(self.writeData.to_bytes(1,byteorder='big',signed=True))))
-                            writeFile.write(self.writeData.to_bytes(1,byteorder='big',signed=True))
-                            self.writeData=0
-                    lines+=1
-                    print("finish "+ str(lines) +" lines")
-                # while self.left:
-                #     leftInt=int(self.left*10)
-                #     self.left=self.left*10-leftInt
-                #     writeFile.write(leftInt.to_bytes(1,byteorder='big',signed=True))
-        print("the size of the inputfile:"+str(os.path.getsize(inputFile))+" byte")
-        print("the size of the outputfile:"+str(os.path.getsize(outputFile))+" byte")
+                pass
+        #         lines=0
+        #         for line in readFile:
+        #             for c in line:
+        #                 utils.read(self,c)
+        #                 bits=self.generateWriteData()
+        #                 if bits:
+        #                     # print(self.writeData)
+        #                     # print("write into file "+str(self.writeData)+" "+str(bytes(self.writeData.to_bytes(1,byteorder='big',signed=True))))
+        #                     writeFile.write(self.writeData.to_bytes(1,byteorder='big',signed=True))
+        #                     self.writeData=0
+        #             lines+=1
+        #             print("finish "+ str(lines) +" lines")
+        #         # while self.left:
+        #         #     leftInt=int(self.left*10)
+        #         #     self.left=self.left*10-leftInt
+        #         #     writeFile.write(leftInt.to_bytes(1,byteorder='big',signed=True))
+        # print("the size of the inputfile:"+str(os.path.getsize(inputFile))+" byte")
+        # print("the size of the outputfile:"+str(os.path.getsize(outputFile))+" byte")
 
