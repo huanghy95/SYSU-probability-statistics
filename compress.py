@@ -24,7 +24,7 @@ class Compress:
         #初始化二阶概率的左右端点
         self.lp2=np.zeros(self.total*self.total)
         self.rp2=np.zeros(self.total*self.total)
-        utils.update(self.lp1,self.rp1,self.cnt1,self.total)
+        utils.update(self)
 
 
     #计算可写入文件数字
@@ -51,12 +51,12 @@ class Compress:
                 for line in readFile:
                     for c in line:
                         utils.read(self,c)
-                        # bits=self.generateWriteData()
-                        # if bits:
-                        #     # print(self.writeData)
-                        #     # print("write into file "+str(self.writeData)+" "+str(bytes(self.writeData.to_bytes(1,byteorder='big',signed=True))))
-                        #     writeFile.write(self.writeData.to_bytes(1,byteorder='big',signed=True))
-                        #     self.writeData=0
+                        bits=self.generateWriteData()
+                        if bits:
+                            # print(self.writeData)
+                            # print("write into file "+str(self.writeData)+" "+str(bytes(self.writeData.to_bytes(1,byteorder='big',signed=True))))
+                            writeFile.write(self.writeData.to_bytes(1,byteorder='big',signed=True))
+                            self.writeData=0
                     lines+=1
                     print("finish "+ str(lines) +" lines")
                 # while self.left:
