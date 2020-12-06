@@ -21,14 +21,14 @@ def bin2float(bin):
     return num
 
 #更新字典
-def update(self):
+def update(lp,rp,cnt,total):
     cur=0
-    for i in range(self.total):
-        self.rp2[cur]=(0 if cur==0 else self.rp2[cur-1])+self.cnt2[i]
+    for i in range(total):
+        rp[cur]=(0 if cur==0 else rp[cur-1])+cnt[i]
         cur+=1
-    sum=self.rp2[self.total-1]
-    self.rp2/=sum
-    self.lp2[1:self.total]=self.rp2[0:self.total-1]
+    sum=rp[total-1]
+    rp/=sum
+    lp[1:total]=rp[0:total-1]
 
 #读入字符
 def read(self,c):
@@ -49,4 +49,4 @@ def read(self,c):
         self.left=self.left+diff*self.lp2[ordC]
         self.cnt2[ordC]+=1
         self.last=ord(c)
-        update(self)
+        update(self.lp2,self.rp2,self.cnt2,self.total*self.total)

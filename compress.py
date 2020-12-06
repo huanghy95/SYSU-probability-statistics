@@ -24,10 +24,10 @@ class Compress:
         #初始化二阶概率的左右端点
         self.lp2=np.zeros(self.total*self.total)
         self.rp2=np.zeros(self.total*self.total)
-        utils.update(self)
+        utils.update(self.lp1,self.rp1,self.cnt1,self.total)
 
 
-    #计算可写入文件数字
+    #计算可写入文件数字(TODO)
     def generateWriteData(self):
         bits=0
         while True:
