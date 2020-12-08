@@ -2,29 +2,46 @@ import numpy as np
 import os
 import math
 #暴力将长度为lenght的浮点数转化为二进制数
-def float2bin(num):
+def float2bin(nums):
     bins = np.array([])
-    length=len(num)
-    for i in range(length-1,0,-1):
-        num[i]*=2
-        if i==0:
-            if  num[i]>=10:
-                np.append(bins,1)
-                num[i]-=10
+    length=len(nums)
+    cnt=0
+    while cnt<length/2:
+        for i in range(length-1,-1,-1):
+            # print(str(i),' ',str(nums[i]))
+            nums[i]=2*int(nums[i])
+            if i==0:
+                if  nums[i]>=10:
+                    bins=np.append(bins,int(1))
+                    nums[i]-=10
+                else:
+                    bins=np.append(bins,int(0))
             else:
-                np.append(bins,0)
-        else:
-            if  num[i]>=10:
-                num[i-1]+=1
-                num[i]-=10
+                if  nums[i]>=10:
+                    nums[i-1]+=1
+                    nums[i]-=10
+        cnt+=1
     return bins
 
 #将二进制数精确转化为浮点数
-def bin2float(bin):
-    exponent=np.arange(0,len(bin),1)
-    num=np.sum(np.multiply(bin,1/pow(2,exponent)))
-    return num
+def bin2float(bins):
+    exponent=np.arange(0,len(bins),1)
+    nums=np.sum(np.multiply(bins,1/pow(2,exponent)))
+    return nums
 
+def bin2hex(bins):
+    hexs=np.array([])
+    cur=0
+    cnt=0
+    for i in bins:
+        cur*=2
+        cur+=i
+        cnt+=1
+        if cnt==4:
+            cnt=0
+            hexs=np.append(hexs,cur);
+            cur=0
+    return hexs
 #更新字典
 def update(lp,rp,cnt,total):
     cur=0
@@ -49,8 +66,10 @@ def read(self,c):
     #其他状况用二阶
     else:
         ordC=self.last*self.total+ord(c) #下标
-        self.right=self.left+self.diff*self.rp2[ordC] 
+        self.right=self.left+diff*self.rp2[ordC] 
         self.left=self.left+diff*self.lp2[ordC]
+        # print("lp ",str(self.lp2[ordC]),' rp ',str(self.rp2[ordC]))
+        # print("new left ",str(self.left)," new right ",str(self.right))
         self.cnt2[ordC]+=1 
         self.last=ord(c) # 记录上次出现字符
         update(self.lp2,self.rp2,self.cnt2,self.total*self.total) #更新字典
