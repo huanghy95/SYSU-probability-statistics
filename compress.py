@@ -1,4 +1,5 @@
 import numpy as np
+import gmpy2
 import os
 import string
 class Compress:
@@ -6,7 +7,7 @@ class Compress:
     def __init__(self):
         self.left=0.0#左区间
         self.right=1.0#右区间
-        self.writeData=0#最大相同次数
+        self.writeData=gmpy.mpz(0)#最大相同次数
         self.last=-1#上一个字符的ascii码
         self.total=256
         self.cnt1=np.zeros(self.total)
@@ -85,16 +86,22 @@ class Compress:
                     for c in line:
                         self.read(c)
                         while self.generateWriteData():
+                            pass
                             # print(self.writeData)
                             # print("write into file "+str(self.writeData)+" "+str(bytes(self.writeData.to_bytes(1,byteorder='big',signed=True))))
-                            writeFile.write(self.writeData.to_bytes(1,byteorder='big',signed=True))
-                            self.writeData=0
+                            # writeFile.write(self.writeData.to_bytes(1,byteorder='big',signed=True))
+                            # self.writeData=0
                     lines+=1
                     print("finish "+ str(lines) +" lines")
                 # while self.left:
                 #     leftInt=int(self.left*10)
                 #     self.left=self.left*10-leftInt
                 #     writeFile.write(leftInt.to_bytes(1,byteorder='big',signed=True))
+                bit = self.writeData.digits(2)
+                while len(bit) != 0:
+                    qwq = bit[1:9]
+                    writeFile.write(qwq.to_bytes(1, byteorder = 'big', signed = False));
+                    bit = bit[9:]
         print("the size of the inputfile:"+str(os.path.getsize(inputFile))+" byte")
         print("the size of the outputfile:"+str(os.path.getsize(outputFile))+" byte")
 
