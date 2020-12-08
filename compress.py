@@ -7,7 +7,7 @@ class Compress:
     def __init__(self):
         self.left=0.0#左区间
         self.right=1.0#右区间
-        self.writeData=gmpy.mpz(0)#最大相同次数
+        self.writeData=gmpy2.mpz(0)#最大相同次数
         self.last=-1#上一个字符的ascii码
         self.total=256
         self.cnt1=np.zeros(self.total)
@@ -99,7 +99,7 @@ class Compress:
                 #     writeFile.write(leftInt.to_bytes(1,byteorder='big',signed=True))
                 bit = self.writeData.digits(2)
                 while len(bit) != 0:
-                    qwq = bit[1:9]
+                    qwq = int(bit[1:9],2)
                     writeFile.write(qwq.to_bytes(1, byteorder = 'big', signed = False));
                     bit = bit[9:]
         print("the size of the inputfile:"+str(os.path.getsize(inputFile))+" byte")
