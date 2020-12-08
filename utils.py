@@ -1,17 +1,22 @@
 import numpy as np
 import os
 import math
-#将长度为lenght的浮点数转化为二进制数
-def float2bin(num,length):
+#暴力将长度为lenght的浮点数转化为二进制数
+def float2bin(num):
     bins = np.array([])
-    while length > 0:
-        num = num * 2
-        if num >= 1.0:
-            np.append(bins,1)
+    length=len(num)
+    for i in range(length-1,0,-1):
+        num[i]*=2
+        if i==0:
+            if  num[i]>=10:
+                np.append(bins,1)
+                num[i]-=10
+            else:
+                np.append(bins,0)
         else:
-            np.append(bins,0)
-        num -= int(num)
-        length -= 1
+            if  num[i]>=10:
+                num[i-1]+=1
+                num[i]-=10
     return bins
 
 #将二进制数精确转化为浮点数
