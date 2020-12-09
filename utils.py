@@ -2,12 +2,13 @@ import numpy as np
 import os
 import math
 #暴力将长度为lenght的浮点数转化为二进制数
-def float2bin(nums):
+def float2bin(nums,codeLength):
     bins = np.array([])
     length=len(nums)
     cnt=0
     forward=0
-    while cnt<length/2:
+    codeLength=int(codeLength)
+    while cnt<codeLength:
         for i in range(length-1,-1,-1):
             nums[i]=2*int(nums[i])
             if forward:

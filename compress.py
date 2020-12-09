@@ -53,17 +53,18 @@ class Compress:
                         # print("reading ",c)
                         self.generateWriteData()
                     lines+=1
-                    print("finish "+ str(lines) +" lines")
-                while self.left:
-                    leftInt=int(self.left*10)
-                    self.left=self.left*10-leftInt
-                    self.nums=np.append(self.nums,leftInt)
-                bins=utils.float2bin(self.nums)
+                    print("finish "+ str(lines) +" lines") 
+                leftInt=int(self.left*10)
+                self.left=self.left*10-leftInt
+                self.nums=np.append(self.nums,leftInt+1)
+                codeLength=len(self.nums)*math.log(10)/math.log(2)
+                self.nums=self.nums[::-1]
+                bins=utils.float2bin(self.nums,codeLength)
                 hexs=utils.bin2hex(bins)
-                # print(self.nums[0])
-                # print(bins[0])
-                # print(hexs[0])
-                # print("the nums")
+                print(codeLength)
+                print("the size of nums: ",str(len(self.nums)))
+                print("the size of bins: ",str(len(bins)))
+                print("the size of hexs: ",str(len(hexs)))
                 # for i in self.nums:
                 #     print(int(i),end='')
                 # print('')
