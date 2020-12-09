@@ -6,20 +6,24 @@ def float2bin(nums):
     bins = np.array([])
     length=len(nums)
     cnt=0
+    forward=0
     while cnt<length/2:
         for i in range(length-1,-1,-1):
-            # print(str(i),' ',str(nums[i]))
             nums[i]=2*int(nums[i])
+            if forward:
+                nums[i]+=1
+                forward=0
             if i==0:
                 if  nums[i]>=10:
                     bins=np.append(bins,int(1))
+                    forward=1
                     nums[i]-=10
                 else:
                     bins=np.append(bins,int(0))
             else:
                 if  nums[i]>=10:
-                    nums[i-1]+=1
-                    nums[i]-=10
+                    forward=1
+                    nums[i]-=10      
         cnt+=1
     return bins
 
