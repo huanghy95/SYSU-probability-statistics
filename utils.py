@@ -34,19 +34,19 @@ def bin2float(bins):
     nums=np.sum(np.multiply(bins,1/pow(2,exponent)))
     return nums
 
-def bin2hex(bins):
-    hexs=np.array([])
+def bin2byte(bins):
+    byte=np.array([])
     cur=0
     cnt=0
     for i in bins:
         cur*=2
         cur+=i
         cnt+=1
-        if cnt==4:
+        if cnt==8:
             cnt=0
-            hexs=np.append(hexs,cur);
+            byte=np.append(byte,cur);
             cur=0
-    return hexs
+    return byte
 #更新字典
 def update(lp,rp,cnt,total):
     cur=0

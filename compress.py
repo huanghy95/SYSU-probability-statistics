@@ -60,11 +60,11 @@ class Compress:
                 codeLength=len(self.nums)*math.log(10)/math.log(2)
                 self.nums=self.nums[::-1]
                 bins=utils.float2bin(self.nums,codeLength)
-                hexs=utils.bin2hex(bins)
+                byte=utils.bin2byte(bins)
                 print(codeLength)
                 print("the size of nums: ",str(len(self.nums)))
                 print("the size of bins: ",str(len(bins)))
-                print("the size of hexs: ",str(len(hexs)))
+                print("the size of hexs: ",str(len(byte)))
                 # for i in self.nums:
                 #     print(int(i),end='')
                 # print('')
@@ -75,8 +75,8 @@ class Compress:
                 # print("the hex code")
                 # for i in hexs:
                 #     print(i,end='')
-                for i in hexs:
-                    writeFile.write(int(i).to_bytes(1,byteorder='big',signed=True))
+                for i in byte:
+                    writeFile.write(int(i).to_bytes(1,byteorder='big',signed=False))
                 # while self.left:
                 #     leftInt=int(self.left*10)
                 #     self.left=self.left*10-leftInt
