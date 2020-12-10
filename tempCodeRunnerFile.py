@@ -1,1 +1,2 @@
-input("请输入字符序列:").lower()
+le')
+# parser.add_argument('outputFile', help='ouputF
