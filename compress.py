@@ -7,7 +7,7 @@ class Compress:
         self.left=0.0#左区间
         self.right=1.0#右区间
         self.writeData=gmpy2.mpz(0)#最大相同次数
-        self.maxCharDigits = 8 #规定个字符可能出现次数的二进制位数，字符表将占用32*maxCharDigits个Byte
+        self.maxCharDigits = 16 #规定个字符可能出现次数的二进制位数，字符表将占用32*maxCharDigits个Byte
         self.total=256
         self.cnt=np.zeros(self.total)
         #初始化一阶概率的左右端点
@@ -15,7 +15,7 @@ class Compress:
         self.rp=np.zeros(self.total)
 
     #算出静态字典
-    def generateBible(self,inputFile):
+    def generateDict(self,inputFile):
         with open("./"+inputFile,"r") as readFile:
             for line in readFile:
                 for c in line:
@@ -49,11 +49,12 @@ class Compress:
 
     #压缩(TODO)
     def ziptxt(self,inputFile,outputFile):
-        self.generateBible(inputFile)
+        self.generateDict(inputFile)
         with open("./"+inputFile,"r") as readFile:
             with open("./"+outputFile,"wb") as writeFile:
+                # print(self.cnt)
                 for i in range(256):
-                    writeFile.write(int(self.cnt[i]).to_bytes(1, byteorder = 'big', signed = False));
+                    writeFile.write(int(self.cnt[i]).to_bytes(2, byteorder = 'big', signed = False));
                 for line in readFile:
                     for c in line:
                         self.transform(c)

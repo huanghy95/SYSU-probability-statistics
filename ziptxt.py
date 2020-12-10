@@ -9,6 +9,6 @@ import argparse
 # inputFile=args.inputFile
 # outputFile=args.outputFile
 inputFile="data.in"
-outputFile="data.out"
+outputFile="data.compress"
 mycompress=compress.Compress()
 mycompress.ziptxt(inputFile,outputFile)
