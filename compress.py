@@ -7,7 +7,7 @@ class Compress:
         self.left=0.0#左区间
         self.right=1.0#右区间
         self.writeData=gmpy2.mpz(0)#最大相同次数
-        self.maxCharDigits = 12 #规定个字符可能出现次数的二进制位数，字符表将占用32*maxCharDigits个Byte
+        self.maxCharDigits = 8 #规定个字符可能出现次数的二进制位数，字符表将占用32*maxCharDigits个Byte
         self.total=256
         self.cnt=np.zeros(self.total)
         #初始化一阶概率的左右端点
@@ -52,7 +52,8 @@ class Compress:
         self.generateBible(inputFile)
         with open("./"+inputFile,"r") as readFile:
             with open("./"+outputFile,"wb") as writeFile:
-                for 1 in range()
+                for i in range(256):
+                    writeFile.write(int(self.cnt[i]).to_bytes(1, byteorder = 'big', signed = False));
                 for line in readFile:
                     for c in line:
                         self.transform(c)
