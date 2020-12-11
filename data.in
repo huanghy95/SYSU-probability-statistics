@@ -1,27 +1,345 @@
-Launchpad Entry: https://launchpad.net/distros/ubuntu/+spec/kubuntu-intelligent-menu-entries
+February 2015 Team Reports
+Teams
 
-Created: 2006-06-09 by JonathanRiddell
+Team Reports
 
-Contributors: JonathanRiddell
+Team Reporting Guide
 
-Packages affected: kdebase
+Getting Started
 
-Summary
-Allow .desktop files to suggest how they are displayed and to displayed only if other files are not available.
+Contribute!
 
-Rationale
-Kontact parts are current set to not display, they should be able to display only if Kontact is not installed.
+Creating a Team
 
-Programmes can be branded or generic, currently we only display "Name (Generic Name)", .desktop file should be able to display if they want the Name shown, GenericName shown or both.
+Knowledge Base
 
-Use cases
-Scope
-Design
-Implementation
-Code
-Data preservation and migration
-Outstanding issues
-BoF agenda and discussion
-Playing with kicker. By special request of Matthias Ettlich.
-CategorySpec
+FAQ
 
+TODO List
+
+Contacts
+
+Contents
+February 2015 Team Reports
+Ubuntu Governance
+Community Council
+Developer Membership Board
+Forum Council
+IRC Council
+LoCo Council
+Membership Boards
+Technical Board
+Ubuntu Development Teams
+Reviewers Team
+Xubuntu Team
+Ubuntu Studio
+Ubuntu LoCo Teams
+Argentina Team
+Asturian Team
+Australian Team
+Belgian Team
+Cameroonian Team
+Canadian Team
+Catalan Team
+China Team
+Chilean Team
+Ubuntu Colombia
+Czech Team
+Danish Team
+Dutch Team
+Ecuador Team
+French Team
+German Kubuntu Team
+Greek Team
+Honduras Team
+Hungarian Team
+Indian Team
+Ubuntu Ireland
+Ubuntu Israel
+Japanese Team
+Korean Team
+Montenegro Team
+Nicaraguan Team
+Norwegian team
+Philippine Team
+Quebec Team
+Romanian Team
+Russian Team
+Serbian Team
+South African Ubuntu team
+Swedish Team
+Swiss Team
+Ubuntu Tunisian LoCo Team
+Ubuntu United Kingdom LoCo Team
+United States Teams
+US Teams Project
+Ubuntu California
+Ubuntu Chicago LoCo Team
+District of Columbia Team
+Florida LoCo Team
+Iowa Team
+New York State Team
+Ubuntu North Carolina LoCo Team
+Ohio Team
+Oregon Team
+Pennsylvania Team
+Virginia Team
+Washington Team
+Wisconsin Team
+Ubuntu Venezuela Team
+Zimbabwe Team
+Additional Ubuntu Teams
+Ubuntu Accessibility Team
+Ubuntu Classroom Team
+Ubuntu NGO Team
+Ubuntu Women Team
+If your team is not making team reports, see these guidelines for how to do so.
+
+
+
+Ubuntu Governance
+Community Council
+Meeting 2015-02-05
+Technical Board catch up
+LoCo Council catch up
+
+http://ubottu.com/meetingology/logs/ubuntu-meeting/2015/ubuntu-meeting.2015-02-05-17.02.moin.txt
+
+Sent out call for nominations for Membership Board: https://lists.ubuntu.com/archives/ubuntu-community-team/2015-February/000416.html
+
+Meeting 2015-02-19
+Documentation Team catch up
+QA Team catch up
+http://ubottu.com/meetingology/logs/ubuntu-meeting/2015/ubuntu-meeting.2015-02-19-17.02.moin.txt
+
+Developer Membership Board
+
+Forum Council
+
+IRC Council
+
+LoCo Council
+
+Membership Boards
+
+Technical Board
+
+Ubuntu Development Teams
+Reviewers Team
+
+Xubuntu Team
+Team Meetings
+Xubuntu/Meetings/Archive/Minutes/2015-02-18
+
+Xubuntu/Meetings/Archive/Minutes/2015-02-25
+
+Team Updates
+Trusty .2 testing - finally moving again
+Daily vivid testing - moving in fits and starts
+xfce seems to be on track for the 4.12 release towards the end of the month
+xfce4-settings 4.11.4 released, available in vivid
+xfwm4 4.11.3 released, available in vivid
+lightdm-gtk-greeter-settings uploaded to vivid-proposed, awaiting archive admin approval
+Unit193 updated the seed, xubuntu-desktop now depends on xubuntu-core
+libxfce4util 4.11.0-1 pushed to vivid
+Created a launchpad project for xfpanel-switch, https://launchpad.net/xfpanel-switch, will not be including in vivid, postponed until 15.10
+
+Xfce4.12 release now has a clear roadmap and dates: https://wiki.xfce.org/releng/4.12/roadmap
+
+xubuntuteam trello created, https://trello.com/xubuntuteam
+
+Unit193 made several fixes to the documentation, including lowering the required translation cut-off percentage to 70 and some rewriting on the internet-networks chapter
+User survey #1 started, have 310+ responses already
+development wallpaper uploaded
+Greybird now supports the ubiquity panel
+Greybird has been updated for lightdm-gtk-greeter2.0
+Our icon-theme has been extended with lots of new symbolic icons for gtk3 apps
+lightdm-gtk-greeter 2.0 released, available in vivid
+full mirrors list up on xubuntu.org for downloads
+The new website theme (with fixes) is live!!!
+Trusty testing - once we had a testable image - went well - 94 reported results for that
+First count for QA incentive will be done by Sunday for ochosi to approve
+vivid beta testing is not going too well with the known issue, release team need to make a decision
+pleia2 published "Xubuntu At Mexican Collections Agencies" blog post http://xubuntu.org/news/xubuntu-at-mexican-collection-agencies/
+
+Xfce 4.12 is to be released next weekend
+Team has got an ACK for a FFe for 4.12 uploads, will be uploaded once everything has settled
+Next freezes: UIFreeze March 12, DocStringFreeze March 19
+
+Ubuntu Studio
+
+Ubuntu LoCo Teams
+Argentina Team
+
+Asturian Team
+
+Australian Team
+
+Belgian Team
+
+Cameroonian Team
+
+Canadian Team
+
+Catalan Team
+February 2nd: irc meeting discusing UGJ
+February 7th: assistance to Ubuntu Phone insiders event in London
+February 7th: Ubuntu Global Jam on @ubuntu-cat at Freenode, translations and start of migration of web page to new version
+February 22nd: irc meeting discussing meetings themselves, next Ubuntu release party and Ubuntu Phone insiders event
+February 23rd: Gimp workshop at the Escola del Treball of Barcelona.
+China Team
+
+Chilean Team
+
+Ubuntu Colombia
+
+Czech Team
+
+Danish Team
+
+Dutch Team
+
+Ecuador Team
+
+French Team
+
+German Kubuntu Team
+
+Greek Team
+
+Honduras Team
+
+Hungarian Team
+
+Indian Team
+
+Ubuntu Ireland
+
+Ubuntu Israel
+
+Japanese Team
+Event
+We attended Open Source Conference 2015 Tokyo/Spring as exhibitor and speaker.
+http://www.ospn.jp/osc2015-spring/
+
+Writings
+Software Design
+Ubuntu Monthly Report: http://gihyo.jp/magazine/SD/archive/2015/201503
+
+Special Topics: "Snappy Ubuntu Core" by Mitsuya Shibata
+Ubuntu Weekly Topcis
+http://gihyo.jp/admin/clip/01/ubuntu-topics/201502/06
+
+http://gihyo.jp/admin/clip/01/ubuntu-topics/201502/13
+
+http://gihyo.jp/admin/clip/01/ubuntu-topics/201502/27
+
+Ubuntu Weekly Recipe
+http://gihyo.jp/admin/serial/01/ubuntu-recipe/0360
+
+http://gihyo.jp/admin/serial/01/ubuntu-recipe/0361
+
+http://gihyo.jp/admin/serial/01/ubuntu-recipe/0362
+
+http://gihyo.jp/admin/serial/01/ubuntu-recipe/0363
+
+Korean Team
+
+Montenegro Team
+
+Nicaraguan Team
+
+Norwegian team
+
+Philippine Team
+
+Quebec Team
+
+Romanian Team
+
+Russian Team
+
+Serbian Team
+* Ubuntu hour - lectures for beginners were held in Belgrade haklab, every Tuesday.
+
+* On Friday 6th, Be Ubuntu - lectures and help guides. How to install and use Ubuntu software, held in Belgrade haklab every first Friday on the month.
+
+* Results of competition called "Creating course-ware using free software". 230 participants, 97 were awarded.
+
+* Preparation for LuGONS 4th BarCamp.
+
+* On Sunday 1st, 8th, 15th and 22nd February, Administration team meeting was held.
+
+South African Ubuntu team
+Tue, 24 February: Monthly IRC Meet -- Minutes
+
+Swedish Team
+
+Swiss Team
+
+Ubuntu Tunisian LoCo Team
+RMS Talk - Community was present during RMS talk at Sousse about « Copyright vs Community »
+Ubuntu United Kingdom LoCo Team
+
+United States Teams
+US TEAMS PROJECT
+
+UBUNTU CALIFORNIA
+Team Meetings:
+Sunday, February 8th
+
+Ubuntu Hours:
+February 8th, Berkeley
+
+February 11th, San Francisco
+
+February 7th: Ubuntu Global Jam San Diego
+
+February 8th: Ubuntu Global Jam San Francisco
+
+Photos
+
+Blog
+
+February 19th-22nd: Southern California Linux Expo
+
+Ubucon
+Booth
+Blog post from Michael Hall
+
+UBUNTU CHICAGO LOCO TEAM
+
+DISTRICT OF COLUMBIA TEAM
+
+FLORIDA LOCO TEAM
+
+IOWA TEAM
+
+NEW YORK STATE TEAM
+
+UBUNTU NORTH CAROLINA LOCO TEAM
+
+OHIO TEAM
+
+OREGON TEAM
+
+PENNSYLVANIA TEAM
+
+VIRGINIA TEAM
+
+WASHINGTON TEAM
+
+WISCONSIN TEAM
+
+Ubuntu Venezuela Team
+
+Zimbabwe Team
+
+Additional Ubuntu Teams
+Ubuntu Accessibility Team
+
+Ubuntu Classroom Team
+
+Ubuntu NGO Team
+
+Ubuntu Women Team
