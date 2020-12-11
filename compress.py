@@ -72,8 +72,8 @@ class Compress:
                     for c in line:
                         self.read(c)
                         self.generateWriteData()
-                        # print(self.left)
-                        # print(self.right)
+                        print(self.left)
+                        print(self.right)
                     lines+=1
                 self.writeData*=10
                 self.writeData+=int(self.right*10)

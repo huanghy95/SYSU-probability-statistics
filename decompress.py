@@ -66,9 +66,10 @@ class Decompress:
             if leftInt==rightInt:
                 self.left=self.left*10-leftInt
                 self.right=self.right*10-rightInt
-                self.cur *= 10
-                self.cur += ord(self.readData[0]) - 48
-                self.readData = self.readData[1:]
+                if (len(self.readData) != 0):
+                    self.cur *= 10
+                    self.cur += ord(self.readData[0]) - 48
+                    self.readData = self.readData[1:]
             else: 
                 break
 
@@ -80,8 +81,8 @@ class Decompress:
                 break
         self.update_table(c)
         self.update_cur()
-        # print(self.left)
-        # print(self.right)
+        print(self.left)
+        print(self.right)
         return c
 
     #解压
@@ -100,14 +101,15 @@ class Decompress:
         self.readData = self.readData[1:]#cut the first sign position
         self.cur = gmpy2.mpfr(1.0)
         self.log10 = gmpy2.mpfr(1.0)
-        for i in range(100):
+        self.len = min(100, len(self.readData))
+        for i in range(self.len):
             self.log10 *= 10
-        for i in range(100):
+        for i in range(self.len):
             self.cur *= 10
             self.cur += ord(self.readData[0]) - 48
             self.readData = self.readData[1:]
         with open("./"+outputFile,"w") as writeFile:
-            while len(self.readData) != 0:
+            while len(self.readData) != -1:
                 c = self.get_c()
                 writeFile.write(c)
 
