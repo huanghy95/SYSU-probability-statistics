@@ -1,3 +1,5 @@
+# SYSU-probability-Dynamemic_zero
+
 ## To run in exe
 
 ```
@@ -34,7 +36,7 @@ python ziptxt.py <input> <output>
 python unziptxt.py <input> <output>
 ```
 
-### TO check the difference
+## TO check the difference
 
 In Windows
 
