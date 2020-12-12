@@ -1,345 +1,125 @@
-February 2015 Team Reports
-Teams
-
-Team Reports
-
-Team Reporting Guide
-
-Getting Started
-
-Contribute!
-
-Creating a Team
-
-Knowledge Base
-
-FAQ
-
-TODO List
-
-Contacts
-
-Contents
-February 2015 Team Reports
-Ubuntu Governance
-Community Council
-Developer Membership Board
-Forum Council
-IRC Council
-LoCo Council
-Membership Boards
-Technical Board
-Ubuntu Development Teams
-Reviewers Team
-Xubuntu Team
-Ubuntu Studio
-Ubuntu LoCo Teams
-Argentina Team
-Asturian Team
-Australian Team
-Belgian Team
-Cameroonian Team
-Canadian Team
-Catalan Team
-China Team
-Chilean Team
-Ubuntu Colombia
-Czech Team
-Danish Team
-Dutch Team
-Ecuador Team
-French Team
-German Kubuntu Team
-Greek Team
-Honduras Team
-Hungarian Team
-Indian Team
-Ubuntu Ireland
-Ubuntu Israel
-Japanese Team
-Korean Team
-Montenegro Team
-Nicaraguan Team
-Norwegian team
-Philippine Team
-Quebec Team
-Romanian Team
-Russian Team
-Serbian Team
-South African Ubuntu team
-Swedish Team
-Swiss Team
-Ubuntu Tunisian LoCo Team
-Ubuntu United Kingdom LoCo Team
-United States Teams
-US Teams Project
-Ubuntu California
-Ubuntu Chicago LoCo Team
-District of Columbia Team
-Florida LoCo Team
-Iowa Team
-New York State Team
-Ubuntu North Carolina LoCo Team
-Ohio Team
-Oregon Team
-Pennsylvania Team
-Virginia Team
-Washington Team
-Wisconsin Team
-Ubuntu Venezuela Team
-Zimbabwe Team
-Additional Ubuntu Teams
-Ubuntu Accessibility Team
-Ubuntu Classroom Team
-Ubuntu NGO Team
-Ubuntu Women Team
-If your team is not making team reports, see these guidelines for how to do so.
-
-
-
-Ubuntu Governance
-Community Council
-Meeting 2015-02-05
-Technical Board catch up
-LoCo Council catch up
+MarvellDoveLucidInstall
+This page covers installation of Ubuntu "Lucid" 10.04 on Marvell Dove X0 boards. Dove Y0/Y1 boards are not supported anymore.
 
-http://ubottu.com/meetingology/logs/ubuntu-meeting/2015/ubuntu-meeting.2015-02-05-17.02.moin.txt
+Known issues
+Please consult the known issues with Ubuntu 10.04 ARM platforms before installing.
 
-Sent out call for nominations for Membership Board: https://lists.ubuntu.com/archives/ubuntu-community-team/2015-February/000416.html
+Preparation and image writing
+PREP WORK
+u-boot requires a TFTP server to download files from. Several are available in universe, including attpd and tftpd-hpa. Install the server on a machine the Dove can access and take note of its IP address.
 
-Meeting 2015-02-19
-Documentation Team catch up
-QA Team catch up
-http://ubottu.com/meetingology/logs/ubuntu-meeting/2015/ubuntu-meeting.2015-02-19-17.02.moin.txt
+UPDATE THE BOOTROM
+All Marvell boards have a BootROM written both in physical ROM, and a small section of SPI that can be used for upgrades. Newest versions of Marvell's kernel requires a newer BootROM, with the newest being 2.04. All X0 boards should ship with BootROM 2.04; if not, you need to upgrade the bootROM to at least 2.04:
 
-Developer Membership Board
+BootROM 2.04: http://people.canonical.com/~mcasadevall/dove/dove_bootrom_2_04_spi_0x1.img
 
-Forum Council
+Take that file, and place it in the TFTP folder. In addition, please make sure your board is setup for SPI booting (detailed below). At the u-boot prompt, type the following commands:
 
-IRC Council
+Marvell>> setenv serverip *ip address of TFTP server*
+Marvell>> setenv ipaddr *board IP address*
+Marvell>> tftp 2000000 dove_bootrom_2_04_spi_0x1.img
+Marvell>> protect off f87f0000 f8800000
+Marvell>> erase f87f0000 f8800000
+Marvell>> cp.b 2000000 f87f0000 10000
+Marvell>> protect on f87f0000 f8800000
+Marvell>> reset
+If successful, the board will boot back into u-boot. Depending on the version of u-boot in SPI, it may or may not print a message about the new BootROM in SPI. These messages look like the following:
 
-LoCo Council
+BootROM version (on chip)= 1.07
+BootROM version (upgrade on SPI)= 2.04
+BootROM Status:
+Number of retries = 0
+UPDATE U-BOOT
+The stock u-boot on the Marvell Dove X0 board is sufficient to boot Ubuntu, and this step is optional. However, bugs related to suspend and resume were fixed with u-boot 4.4.2, and it is highly recommended that you upgrade.
 
-Membership Boards
+Canonical versions have a version string similar this
 
-Technical Board
+U-Boot 1.3.4 (Oct 15 2009 - 12:11:45) Marvell version: 4.3.0 NQ - SPI BOOT. Canonical Development Version.
+The current recommend version of u-boot for dove is Marvell-4.4.2
 
-Ubuntu Development Teams
-Reviewers Team
+If your u-boot is older, you'll have to update it to a newer version. u-boot binaries for X0 are located here: http://people.canonical.com/~mcasadevall/dove/. The date of the binary is at the end of each filename in MMDDYYYY format. Official binaries from Marvell end in Marvell-VERSION. The filename also includes where the u-boot is supposed to be installed to, and the amount of RAM the board should have; MAKE SURE THESE VALUES ARE CORRECT; flashing a bootloader which doesn't match the hardware revision or amount of RAM may prevent the board from powering up and requiring UART recovery.
 
-Xubuntu Team
-Team Meetings
-Xubuntu/Meetings/Archive/Minutes/2015-02-18
+Warning /!\ DANGER - If you are at all unsure, please confirm what you are doing is correct with NCommander; a bad u-boot flash WILL brick your board without a JTAG adapter
 
-Xubuntu/Meetings/Archive/Minutes/2015-02-25
 
-Team Updates
-Trusty .2 testing - finally moving again
-Daily vivid testing - moving in fits and starts
-xfce seems to be on track for the 4.12 release towards the end of the month
-xfce4-settings 4.11.4 released, available in vivid
-xfwm4 4.11.3 released, available in vivid
-lightdm-gtk-greeter-settings uploaded to vivid-proposed, awaiting archive admin approval
-Unit193 updated the seed, xubuntu-desktop now depends on xubuntu-core
-libxfce4util 4.11.0-1 pushed to vivid
-Created a launchpad project for xfpanel-switch, https://launchpad.net/xfpanel-switch, will not be including in vivid, postponed until 15.10
+Lastest X0 Image for 1GiB boards: http://people.canonical.com/~mcasadevall/dove/x0/uboot-SPI-X0-1G_Marvell-4.4.2.bin<<BR>>
+Make sure that the serverip and ipaddr variables are properly set in u-boot (use printenv *name* to check, setenv *name* *value* to change, and save to commit). If you can currently TFTP images to your board, these values are correct.
 
-Xfce4.12 release now has a clear roadmap and dates: https://wiki.xfce.org/releng/4.12/roadmap
+The bubt command is used for upgrading u-boot on the same medium (i.e., flashing a new u-boot to SPI while booted from SPI). It can't be used to go from one boot medium to another (i.e., SPI to NAND).
 
-xubuntuteam trello created, https://trello.com/xubuntuteam
+Marvell>> setenv serverip ''TFTP Server''
+Marvell>> setenv ipaddr ''board IP address''
+Marvell>> bubt ''filename of uboot''
+Answer yes when asked if you wipe the environmental variables. Type reset when done to boot into the new u-boot
 
-Unit193 made several fixes to the documentation, including lowering the required translation cut-off percentage to 70 and some rewriting on the internet-networks chapter
-User survey #1 started, have 310+ responses already
-development wallpaper uploaded
-Greybird now supports the ubiquity panel
-Greybird has been updated for lightdm-gtk-greeter2.0
-Our icon-theme has been extended with lots of new symbolic icons for gtk3 apps
-lightdm-gtk-greeter 2.0 released, available in vivid
-full mirrors list up on xubuntu.org for downloads
-The new website theme (with fixes) is live!!!
-Trusty testing - once we had a testable image - went well - 94 reported results for that
-First count for QA incentive will be done by Sunday for ochosi to approve
-vivid beta testing is not going too well with the known issue, release team need to make a decision
-pleia2 published "Xubuntu At Mexican Collections Agencies" blog post http://xubuntu.org/news/xubuntu-at-mexican-collection-agencies/
+WRITING THE IMAGE
+First of all you need to download the Image to a large enough USB stick (1GB will suffice) that u-boot will be able to use; SanDisk were reported as supported.
 
-Xfce 4.12 is to be released next weekend
-Team has got an ACK for a FFe for 4.12 uploads, will be uploaded once everything has settled
-Next freezes: UIFreeze March 12, DocStringFreeze March 19
+For writing the image either use the usb-imagewriter tool which you can install from the Jaunty universe archive (packages for Hardy (8.04) and Intrepid (8.10) can be found at the usb-imagewriter PPA) or follow the commandline method below.
 
-Ubuntu Studio
 
-Ubuntu LoCo Teams
-Argentina Team
+sudo dd bs=4M if=./lucid-desktop-armel+dove.img of=/dev/sdb
+(assuming your USB stick is called /dev/sdb)
 
-Asturian Team
+You'll also need a SATA disk or large USB harddrive as the target installation device.
 
-Australian Team
+Warning /!\ USB booting is supported, but the Dove bootloader is extremely picky on what devices it will boot from. Using SATA is recommended and perferred
 
-Belgian Team
+Starting the live system manually
+Warning /!\ These instructions are currently for reference if you need to manually start from the boot prompt. Current u-boot versions will autostart from a properly written USB stick
 
-Cameroonian Team
+Attach the USB pendrive you made in the previous step to the Dove, and then reset the board with the drive attached.
 
-Canadian Team
+IMPORTANT - Don't type usb start more than once in any given u-boot session since it will cause u-boot to loose track of all devices it currently sees.
 
-Catalan Team
-February 2nd: irc meeting discusing UGJ
-February 7th: assistance to Ubuntu Phone insiders event in London
-February 7th: Ubuntu Global Jam on @ubuntu-cat at Freenode, translations and start of migration of web page to new version
-February 22nd: irc meeting discussing meetings themselves, next Ubuntu release party and Ubuntu Phone insiders event
-February 23rd: Gimp workshop at the Escola del Treball of Barcelona.
-China Team
+You can test if the drive was detected like this:
 
-Chilean Team
+Marvell>> usb start
+(Re)start USB...
+USB:   scanning bus for devices... 2 USB Device(s) found
+       scanning bus for storage devices... 1 Storage Device(s) found
+Marvell>> fatls usb 0:1
+            casper/
+            dists/
+            pics/
+            .disk/
+            install/
+            preseed/
+            pool/
+     3143   md5sum.txt
+      368   boot.scr
+      228   readme.diskdefines
 
-Ubuntu Colombia
+3 file(s), 7 dir(s)
+If you get file output, your in business. The live image can be started with the following if you have the hush shell available.
 
-Czech Team
-
-Danish Team
-
-Dutch Team
-
-Ecuador Team
-
-French Team
-
-German Kubuntu Team
-
-Greek Team
-
-Honduras Team
-
-Hungarian Team
-
-Indian Team
-
-Ubuntu Ireland
-
-Ubuntu Israel
-
-Japanese Team
-Event
-We attended Open Source Conference 2015 Tokyo/Spring as exhibitor and speaker.
-http://www.ospn.jp/osc2015-spring/
-
-Writings
-Software Design
-Ubuntu Monthly Report: http://gihyo.jp/magazine/SD/archive/2015/201503
-
-Special Topics: "Snappy Ubuntu Core" by Mitsuya Shibata
-Ubuntu Weekly Topcis
-http://gihyo.jp/admin/clip/01/ubuntu-topics/201502/06
-
-http://gihyo.jp/admin/clip/01/ubuntu-topics/201502/13
-
-http://gihyo.jp/admin/clip/01/ubuntu-topics/201502/27
-
-Ubuntu Weekly Recipe
-http://gihyo.jp/admin/serial/01/ubuntu-recipe/0360
-
-http://gihyo.jp/admin/serial/01/ubuntu-recipe/0361
-
-http://gihyo.jp/admin/serial/01/ubuntu-recipe/0362
-
-http://gihyo.jp/admin/serial/01/ubuntu-recipe/0363
-
-Korean Team
-
-Montenegro Team
-
-Nicaraguan Team
-
-Norwegian team
-
-Philippine Team
-
-Quebec Team
-
-Romanian Team
-
-Russian Team
-
-Serbian Team
-* Ubuntu hour - lectures for beginners were held in Belgrade haklab, every Tuesday.
-
-* On Friday 6th, Be Ubuntu - lectures and help guides. How to install and use Ubuntu software, held in Belgrade haklab every first Friday on the month.
-
-* Results of competition called "Creating course-ware using free software". 230 participants, 97 were awarded.
-
-* Preparation for LuGONS 4th BarCamp.
-
-* On Sunday 1st, 8th, 15th and 22nd February, Administration team meeting was held.
-
-South African Ubuntu team
-Tue, 24 February: Monthly IRC Meet -- Minutes
-
-Swedish Team
-
-Swiss Team
-
-Ubuntu Tunisian LoCo Team
-RMS Talk - Community was present during RMS talk at Sousse about « Copyright vs Community »
-Ubuntu United Kingdom LoCo Team
-
-United States Teams
-US TEAMS PROJECT
-
-UBUNTU CALIFORNIA
-Team Meetings:
-Sunday, February 8th
-
-Ubuntu Hours:
-February 8th, Berkeley
-
-February 11th, San Francisco
-
-February 7th: Ubuntu Global Jam San Diego
-
-February 8th: Ubuntu Global Jam San Francisco
-
-Photos
-
-Blog
-
-February 19th-22nd: Southern California Linux Expo
-
-Ubucon
-Booth
-Blog post from Michael Hall
-
-UBUNTU CHICAGO LOCO TEAM
-
-DISTRICT OF COLUMBIA TEAM
-
-FLORIDA LOCO TEAM
-
-IOWA TEAM
-
-NEW YORK STATE TEAM
-
-UBUNTU NORTH CAROLINA LOCO TEAM
-
-OHIO TEAM
-
-OREGON TEAM
-
-PENNSYLVANIA TEAM
-
-VIRGINIA TEAM
-
-WASHINGTON TEAM
-
-WISCONSIN TEAM
-
-Ubuntu Venezuela Team
-
-Zimbabwe Team
-
-Additional Ubuntu Teams
-Ubuntu Accessibility Team
-
-Ubuntu Classroom Team
-
-Ubuntu NGO Team
-
-Ubuntu Women Team
+Marvell>> usb start
+(Re)start USB...
+USB:   scanning bus for devices... 2 USB Device(s) found
+       scanning bus for storage devices... 1 Storage Device(s) found
+Marvell>> fatload usb 0:1 0x1000 boot.scr
+reading boot.scr
+
+368 bytes read
+Marvell>> autoscr 1000
+## Executing script at 00001000
+Loading Ubuntu LiveCD...
+reading /casper/uImage
+........................................................................................................................................................................................................................................................................
+Wrong Ramdisk Image Format
+
+Starting kernel ...
+
+Uncompressing Linux............................................................
+.............................................................................................................. done, booting the kernel.
+Linux version 2.6.31-201-dove (buildd@jaboticaba) (gcc version 4.4.1 (Ubuntu 4.4.1-3ubuntu1) ) #5-Ubuntu Mon Aug 24 23:06:43 UTC 2009 (Ubuntu 2.6.31-201.5-dove)
+If your using a non-hush enabled u-boot, you will have to load the uImage and uInitrd by hand to start the live environment
+
+Marvell>> usb start
+(Re)start USB...
+USB:   scanning bus for devices... 2 USB Device(s) found
+       scanning bus for storage devices... 1 Storage Device(s) found
+Marvell>> fatload usb 0:1 0x20000 /casper/uImage
+Marvell>> fatload usb 0:1 0x110000 /casper/uInitrd
+Marvell>> setenv bootcmd mem=512M file=/cdrom/preseed/ubuntu.seed -- boot=casper
+Marvell>> bootm 0x20000 0x110000
