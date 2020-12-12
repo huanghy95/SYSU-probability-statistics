@@ -22,4 +22,4 @@ final-term project
 - TODO
   - decompress细节实现
   - 二层压缩？
-  - ASCII码可显示为128位,是否要取256位?
+  - ASCII码可显示为128位,是否要取256位? 
