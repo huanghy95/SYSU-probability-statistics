@@ -67,25 +67,26 @@ class Compress:
     def ziptxt(self,inputFile,outputFile):
         with open("./"+inputFile,"r") as readFile:
             with open("./"+outputFile,"wb") as writeFile:
+                writeFile.write(os.path.getsize(inputFile).to_bytes(4, byteorder = 'big', signed = False));
                 lines=0
                 for line in readFile:
                     for c in line:
                         self.read(c)
+                        # print("left",str(self.left))
+                        # print("right",str(self.right))
                         self.generateWriteData()
-                        print(self.left)
-                        print(self.right)
                     lines+=1
                 self.writeData*=10
                 self.writeData+=int(self.right*10)
                 self.right=self.right*10-int(self.right*10)
-                # print(self.writeData.digits())
+                # print("self.writeData",str(self.writeData))
                 while(len(self.writeData.digits(2)) %8 != 0):
                     self.writeData*=10
                     self.writeData+=int(self.right*10)
                     self.right=self.right*10-int(self.right*10)
                 # print(self.writeData.digits())
                 bit = self.writeData.digits(2)
-                # print(bit)
+                # print("bit ",bit)
                 while len(bit) >= 8:
                     qwq = int(bit[0:8],2)
                     # print(qwq)

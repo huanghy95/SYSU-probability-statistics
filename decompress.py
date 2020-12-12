@@ -8,6 +8,8 @@ class Decompress:
     #初始化变量
     def __init__(self):
         gmpy2.get_context().precision = 1000
+        self.size=gmpy2.mpz(0)#需要解出字符个数
+        self.finish=gmpy2.mpz(0)#已解出字符个数
         self.left=gmpy2.mpfr(0.0)#左区间
         self.right=gmpy2.mpfr(1.0)#右区间
         self.readData=gmpy2.mpz(0)#最大相同次数
@@ -44,19 +46,29 @@ class Decompress:
 
     def check(self, i):
         diff = self.right - self.left
+        # print("lp of ",i,str(self.lp1[i]))
+        # print(qwq)
+        # print("rp of ",i,str(self.rp1[i]))
         curleft = self.left + diff * self.lp1[i]
         curright = self.left + diff * self.rp1[i]
-        qwq = self.cur / self.log10
+        qwq = gmpy2.mpfr(self.cur / self.log10)
         qwq = qwq - gmpy2.floor(qwq)
-        # print(curleft)
-        # print(qwq)
-        # print(curright)
         if curleft > qwq:
             return False
         if curright < qwq:
             return False 
+        # print()
+        # print("lp ",str(self.lp1[i]))
+        # print("rp ",str(self.rp1[i]))
+        # print("curleft ",str(curleft))
+        # print("before cur ",str(self.cur))
+        # print("qwq ",str(qwq))
+        # print("curtight",str(curright))
         self.left = curleft
         self.right = curright
+        self.cur=qwq*self.log10
+        self.cur=gmpy2.rint_round(self.cur)
+        # print("after cur ",str(self.cur))
         return True
 
     def update_cur(self):
@@ -66,8 +78,8 @@ class Decompress:
             if leftInt==rightInt:
                 self.left=self.left*10-leftInt
                 self.right=self.right*10-rightInt
+                self.cur*=10
                 if (len(self.readData) != 0):
-                    self.cur *= 10
                     self.cur += ord(self.readData[0]) - 48
                     self.readData = self.readData[1:]
             else: 
@@ -78,16 +90,21 @@ class Decompress:
         for i in range(self.total):
             if self.check(i):
                 c = chr(i)
+                # print("get ",c)
                 break
         self.update_table(c)
         self.update_cur()
-        print(self.left)
-        print(self.right)
+        self.finish+=1
+        # print("left ",str(self.left))
+        # print("rtight ",str(self.right))
         return c
 
     #解压
     def unziptxt(self,inputFile,outputFile):
         with open("./"+inputFile,"rb") as readFile:
+            tmp=readFile.read(4)
+            self.size=int.from_bytes(tmp, byteorder='big', signed=False)
+            # print(self.size)
             while True:
                 i = readFile.read(1)
                 if not i:
@@ -97,10 +114,11 @@ class Decompress:
                 self.readData *= 256
                 self.readData += i
         self.readData = self.readData.digits(10)
-        # print(self.readData)
+        print("len ",len(self.readData))
         self.readData = self.readData[1:]#cut the first sign position
         self.cur = gmpy2.mpfr(1.0)
         self.log10 = gmpy2.mpfr(1.0)
+        #初始化
         self.len = min(100, len(self.readData))
         for i in range(self.len):
             self.log10 *= 10
@@ -109,7 +127,7 @@ class Decompress:
             self.cur += ord(self.readData[0]) - 48
             self.readData = self.readData[1:]
         with open("./"+outputFile,"w") as writeFile:
-            while len(self.readData) != -1:
+            while(self.finish<self.size):
                 c = self.get_c()
                 writeFile.write(c)
 
