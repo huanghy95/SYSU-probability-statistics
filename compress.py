@@ -69,7 +69,7 @@ class Compress:
 
     #压缩
     def ziptxt(self, inputFile, outputFile):
-        lines = sum([1 for i in open(inputFile, "r")])
+        lines = sum([1 for i in open("./"+inputFile, "r")])
         print("Compressing")
         #读取文件
         with open("./"+inputFile, "r") as readFile:
