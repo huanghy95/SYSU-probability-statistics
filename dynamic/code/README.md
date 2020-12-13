@@ -1,6 +1,14 @@
 # SYSU-probability-Dynamemic_zero
 mid-term project
 
+compress.py -> 压缩核心代码
+
+decompress.py -> 解压核心代码
+
+zip.py -> 压缩运行代码
+
+unzip.py -> 解压运行代码
+
 - 下载插件hexdump用于二进制文件的查看
   - 右上角进行查看(show hexdump按钮)
 - 大概思路
