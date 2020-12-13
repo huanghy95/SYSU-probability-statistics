@@ -1,9 +1,12 @@
 # SYSU-probability-Dynamemic_zero
 
-## To run in exe
+**Please run in Linux**
+
+## To run in bash
 
 ```
 cd ./release
+chmod +x ziptxt unziptxt
 ```
 
 ### TO zip
@@ -18,9 +21,10 @@ cd ./release
 ./unziptxt <input> <output>
 ```
 
-## To run in python
+## To run in python(3)
 
 ```
+cd ./code
 pip install -r requirements.txt
 ```
 
@@ -38,14 +42,8 @@ python unziptxt.py <input> <output>
 
 ## TO check the difference
 
-In Windows
-
-```
-fc <file1> <file2>
-```
-
-In Linux
-
 ```
 diff <file1> <file2>
 ```
+
+No output for OK!
