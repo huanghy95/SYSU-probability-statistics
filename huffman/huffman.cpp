@@ -49,7 +49,7 @@ int main() {
 
         if (p==-1 || q==-1) break;
         cnt[n]=M1+M2;
-        printf("%d %d %d\n",n,p,q);
+//         printf("%d %d %d\n",n,p,q);
         e[n].push_back({p,"0"});
         e[n].push_back({q,"1"});
         cnt[p]=-1;cnt[q]=-1;
